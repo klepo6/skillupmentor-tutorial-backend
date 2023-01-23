@@ -43,7 +43,7 @@ export class AuthService {
   async register(registerUserDto: RegisterUserDto): Promise<User> {
     const hashedPassword: string = await hash(registerUserDto.password)
     const user = await this.usersService.create({
-      // role_id: null
+      role_id: null,
       ...registerUserDto,
       password: hashedPassword,
     })
@@ -51,7 +51,7 @@ export class AuthService {
   }
 
   async login(userFromReqeuest: User, res: Response): Promise<void> {
-    const user = await this.usersService.findById(userFromReqeuest.id)
+    const { password, ...user } = await this.usersService.findById(userFromReqeuest.id, ['role'])
     const accessToken = await this.generateToken(user.id, user.email, JwtType.ACCESS_TOKEN)
     const accessTokenCookie = await this.generateCookie(accessToken, CookieType.ACCESS_TOKEN)
     const refreshToken = await this.generateToken(user.id, user.email, JwtType.REFRESH_TOKEN)
@@ -77,7 +77,7 @@ export class AuthService {
   }
 
   async refreshTokens(req: Request): Promise<User> {
-    const user = await this.usersService.findBy({ refresh_token: req.cookies.refersh_token })
+    const user = await this.usersService.findBy({ refresh_token: req.cookies.refersh_token }, ['role'])
     if (!user) {
       throw new ForbiddenException()
     }
@@ -133,7 +133,7 @@ export class AuthService {
         case JwtType.REFRESH_TOKEN:
           token = await this.jwtService.signAsync(payload, {
             secret: this.configService.get('JWT_REEFRESH_TOKEN'),
-            expiresIn: `${this.configService.get('JWT_REFRESH_SECRET_EXPIRES')}`,
+            expiresIn: `${this.configService.get('JWT_REFRESH_SECRET_EXPIRES')}s`,
           })
           break
         default:
@@ -175,5 +175,10 @@ export class AuthService {
 
   getCookiesForSignout(): string[] {
     return ['access_token=; HttpOnly; Path=/; Max-Age=0', 'refresh_token=; HttpOnly; Path=/; Max-Age=0']
+  }
+
+  async getUserId(request: Request): Promise<string> {
+    const user = request.user as User
+    return user.id
   }
 }

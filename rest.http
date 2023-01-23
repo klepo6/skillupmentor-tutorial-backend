@@ -21,6 +21,21 @@ Content-Type: application/json
   	"password": "John123!"
 }
 
+### POST /auth/signout
+POST http://localhost:8080/auth/signout HTTP/1.1
+
 
 ### GET /users
 GET http://localhost:8080/users HTTP/1.1
+
+
+### GET /permissions
+GET http://localhost:8080/permissions
+
+### POST /permissions
+POST http://localhost:8080/permissions HTTP/1.1
+Content-Type: application/json
+
+{
+	"name": "view_users"
+}

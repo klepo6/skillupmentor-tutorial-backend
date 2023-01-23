@@ -51,7 +51,6 @@ export class AuthController {
     return this.authService.signout(userId, res)
   }
 
-  @Public()
   @UseGuards(JwtRefreshAuthGuard)
   @Post('refresh')
   @HttpCode(HttpStatus.ACCEPTED)
@@ -69,7 +68,7 @@ export class AuthController {
       last_name: user.last_name,
       email: user.email,
       avatar: user.avatar,
-      //role: user.role?.id ? {id: user.role?.id, name: user.role?.name} : null
+      role: user.role?.id ? { id: user.role?.id, name: user.role?.name } : null,
     }
   }
 }
