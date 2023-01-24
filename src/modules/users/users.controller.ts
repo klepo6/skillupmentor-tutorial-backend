@@ -1,25 +1,25 @@
 import {
-  Controller,
-  UseInterceptors,
+  BadRequestException,
+  Body,
   ClassSerializerInterceptor,
+  Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
-  Query,
   Param,
-  Post,
-  Body,
   Patch,
-  Delete,
+  Post,
+  Query,
   UploadedFile,
-  BadRequestException,
+  UseInterceptors,
 } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
-import { HasPermission } from 'decorators/has-permission-decorator'
 import { User } from 'entities/user.entity'
 import { isFileExtensionSafe, removeFile, saveImageToStorage } from 'helpers/imageStorage'
 import { PaginatedResult } from 'interfaces/paginated-result.interface'
 import { join } from 'path'
+
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { UsersService } from './users.service'

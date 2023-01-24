@@ -1,22 +1,23 @@
 import {
-  Injectable,
   BadRequestException,
-  InternalServerErrorException,
   ForbiddenException,
+  Injectable,
+  InternalServerErrorException,
   UnauthorizedException,
 } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import { UsersService } from 'modules/users/users.service'
 import { JwtService } from '@nestjs/jwt'
-import Logging from 'library/Logging'
-import { compareHash } from 'utils/bcrypt'
 import { User } from 'entities/user.entity'
-import { UserData } from 'interfaces/user.interface'
-import { RegisterUserDto } from './dto/register-user.dto'
-import { hash } from 'utils/bcrypt'
-import { Response, Request } from 'express'
-import { CookieType, JwtType, TokenPayload } from 'interfaces/auth.interface'
+import { Request, Response } from 'express'
 import { PostgresErrorCode } from 'helpers/postgresErrorCode.enum'
+import { CookieType, JwtType, TokenPayload } from 'interfaces/auth.interface'
+import { UserData } from 'interfaces/user.interface'
+import Logging from 'library/Logging'
+import { UsersService } from 'modules/users/users.service'
+import { compareHash } from 'utils/bcrypt'
+import { hash } from 'utils/bcrypt'
+
+import { RegisterUserDto } from './dto/register-user.dto'
 
 @Injectable()
 export class AuthService {

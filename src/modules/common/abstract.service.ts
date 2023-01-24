@@ -1,7 +1,7 @@
-import { Injectable, BadRequestException, InternalServerErrorException } from '@nestjs/common'
-import { Repository } from 'typeorm'
-import Logging from 'library/Logging'
+import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common'
 import { PaginatedResult } from 'interfaces/paginated-result.interface'
+import Logging from 'library/Logging'
+import { Repository } from 'typeorm'
 
 @Injectable()
 export class AbstractService {

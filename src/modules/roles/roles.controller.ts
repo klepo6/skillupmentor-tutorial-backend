@@ -14,6 +14,7 @@ import {
 } from '@nestjs/common'
 import { Role } from 'entities/role.entity'
 import { PaginatedResult } from 'interfaces/paginated-result.interface'
+
 import { CreateUpdateRoleDto } from './dto/create-update-role.dto'
 import { RolesService } from './roles.service'
 

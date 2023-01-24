@@ -5,6 +5,7 @@ import { User } from 'entities/user.entity'
 import Logging from 'library/Logging'
 import { AbstractService } from 'modules/common/abstract.service'
 import { Repository } from 'typeorm'
+
 import { CreatePermissionDto } from './dto/create-permission.dto'
 
 @Injectable()

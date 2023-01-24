@@ -3,9 +3,11 @@ import { ConfigModule } from '@nestjs/config'
 import { APP_GUARD } from '@nestjs/core'
 import { configValidationSchema } from 'config/schema.config'
 import { LoggerMiddleware } from 'middleware/logger.middleware'
+
 import { AuthModule } from './auth/auth.module'
 import { JwtAuthGuard } from './auth/guards/jwt.guard'
 import { DatabaseModule } from './database/database.module'
+import { OrdersModule } from './orders/orders.module'
 import { PermissionsGuard } from './permissions/guards/permission.guard'
 import { PermissionsModule } from './permissions/permissions.module'
 import { ProductsModule } from './products/products.module'
@@ -25,6 +27,7 @@ import { UsersModule } from './users/users.module'
     RolesModule,
     PermissionsModule,
     ProductsModule,
+    OrdersModule,
   ],
   controllers: [],
   providers: [

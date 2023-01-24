@@ -1,5 +1,6 @@
-import { Controller, Get, Post, HttpCode, HttpStatus, Body } from '@nestjs/common'
+import { Body, Controller, Get, HttpCode, HttpStatus, Post } from '@nestjs/common'
 import { Permission } from 'entities/permission.entity'
+
 import { CreatePermissionDto } from './dto/create-permission.dto'
 import { PermissionsService } from './permissions.service'
 
